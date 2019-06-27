@@ -1,0 +1,1 @@
+"use strict";function observeProps(e){e&&Object.keys(e).forEach(function(r){var s=e[r];null!==s&&"type"in s||(s={type:s});var t=s.observer;s.observer=function(){t&&("string"==typeof t&&(t=this[t]),t.apply(this,arguments)),this.set()},e[r]=s})}Object.defineProperty(exports,"__esModule",{value:!0}),exports.observeProps=observeProps;

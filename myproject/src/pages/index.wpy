@@ -1,0 +1,34 @@
+<style lang="less">
+
+</style>
+<template>
+  <view class="search-area">
+    <van-search @search="onSearch" placeholder="搜索文创的商品"></van-search>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import Dialog from '@/components/vant/dialog/dialog'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '文创平台',
+      usingComponents: {
+        'van-search': '../components/vant/search/index'
+      }
+    }
+    data = {
+      searchValue: ''
+    }
+    methods = {
+      onSearch (e) {
+        console.log(e)
+        Dialog.alert({
+          title: '温馨提示',
+          message: '该功能即将上线，敬请期待！',
+          selector: '#selector'
+        })
+      }
+    }
+  }
+</script>
