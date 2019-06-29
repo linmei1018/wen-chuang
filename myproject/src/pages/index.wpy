@@ -1,32 +1,165 @@
 <style lang="less">
+  .van-search__content {
+    background-color: #dedede !important;
+  }
+  .shopping_list {
+    background-color: #DEDEDE;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /*justify-content: space-around;*/
+    padding-top: 3%;
+    padding-left: 3%;
+    padding-bottom: 3%;
+    .list-item{
+      width: 340rpx;
+      height: 460rpx;
+      border-radius: 10rpx;
+      margin-bottom: 30rpx;
+      margin-right: 3%;
+      background-color: #fff;
+      .shopping_icon {
+        width: 340rpx;
+        height: 330rpx
+      }
+      .list_title {
+        font-size: 24rpx;
+        display: block;
+        height: 60rpx;
+        margin-left: 20rpx;
+      }
+      .list_text {
+        margin-left: 20rpx;
+        .head_icon {
+          width: 44rpx;
+          height: 44rpx
+        }
+        text {
+          font-size: 24rpx;
+          color: #616161;
+        }
+      }
+    }
+  }
 
 </style>
 <template>
   <view class="search-area">
-    <van-search @search="onSearch" placeholder="搜索文创的商品"></van-search>
+    <van-search background="#f1f3f4" shape="round" @search="onSearch" placeholder="搜索文创的商品" ></van-search>
+  </view>
+  <view class="home-container">
+    <ivew class="tabNavHome">
+      <van-tabs active="{{ active }}" bind:change="onChange">
+        <van-tab title="推荐"></van-tab>
+        <van-tab title="附近"></van-tab>
+        <van-tab title="关注"></van-tab>
+      </van-tabs>
+    </ivew>
+    <view class="shopping_list">
+      <repeat for="{{shoppingList}}" key="index" index="index" item="item">
+        <view class="list-item" @tap="goDetail(index)">
+          <image src="{{item.img}}" class="shopping_icon" />
+          <text class="list_title">{{item.title}}</text>
+          <ivew class="list_text">
+            <image src="{{item.logo}}" class="head_icon" />
+            <text>{{ item.name }}</text>
+            <van-icon name="like-o" custom-style="margin-left: 40rpx" size="30rpx" />
+            <text>{{ item.shouc }}</text>
+          </ivew>
+        </view>
+      </repeat>
+     </view>
   </view>
 </template>
 <script>
   import wepy from 'wepy'
-  import Dialog from '@/components/vant/dialog/dialog'
 
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '文创平台',
       usingComponents: {
-        'van-search': '../components/vant/search/index'
+        'van-search': '../components/vant/search/index',
+        'van-icon': '../components/vant/icon/index',
+        'van-tab': '../components/vant/tab/index',
+        'van-tabs': '../components/vant/tabs/index'
       }
     }
     data = {
-      searchValue: ''
+      searchValue: '',
+      active: 0,
+      shoppingList: [
+        {
+          img: '../assets/1.png',
+          title: '欧式简约沙发',
+          logo: '../assets/11.png',
+          name: '美少女日志',
+          shouc: '344'
+        },
+        {
+          img: '../assets/2.png',
+          title: '欧式简约沙发',
+          logo: '../assets/33.png',
+          name: '美少女日志',
+          shouc: '344'
+        },
+        {
+          img: '../assets/3.png',
+          title: '欧式简约沙发',
+          logo: '../assets/33.png',
+          name: '美少女日志',
+          shouc: '344'
+        },
+        {
+          img: '../assets/4.png',
+          title: '欧式简约沙发',
+          logo: '../assets/22.png',
+          name: '美少女日志',
+          shouc: '344'
+        },
+        {
+          img: '../assets/5.png',
+          title: '欧式简约沙发',
+          logo: '../assets/22.png',
+          name: '美少女日志',
+          shouc: '344'
+        },
+        {
+          img: '../assets/6.png',
+          title: '欧式简约沙发',
+          logo: '../assets/33.png',
+          name: '美少女日志',
+          shouc: '344'
+        },
+        {
+          img: '../assets/7.png',
+          title: '欧式简约沙发',
+          logo: '../assets/33.png',
+          name: '美少女日志',
+          shouc: '344'
+        },
+        {
+          img: '../assets/8.png',
+          title: '欧式简约沙发',
+          logo: '../assets/22.png',
+          name: '美少女日志',
+          shouc: '344'
+        }
+      ],
+      rows: [12,12]
     }
     methods = {
       onSearch (e) {
         console.log(e)
-        Dialog.alert({
-          title: '温馨提示',
-          message: '该功能即将上线，敬请期待！',
-          selector: '#selector'
+      },
+      onChange(event) {console.log(event)
+        wepy.showToast({
+          title: `切换到标签 ${event.detail.index + 1}`,
+          icon: 'none'
+        })
+      },
+      goDetail(index) {
+        wepy.navigateTo({
+          url: '/pages/shoppingDetail'
         })
       }
     }

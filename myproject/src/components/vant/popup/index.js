@@ -1,1 +1,57 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var component_1=require("./../common/component.js"),transition_1=require("./../mixins/transition.js"),safe_area_1=require("./../mixins/safe-area.js");component_1.VantComponent({classes:["enter-class","enter-active-class","enter-to-class","leave-class","leave-active-class","leave-to-class"],mixins:[transition_1.transition(!1),safe_area_1.safeArea()],props:{transition:{type:String,observer:"observeClass"},customStyle:String,overlayStyle:String,zIndex:{type:Number,value:100},overlay:{type:Boolean,value:!0},closeOnClickOverlay:{type:Boolean,value:!0},position:{type:String,value:"center",observer:"observeClass"}},created:function(){this.observeClass()},methods:{onClickOverlay:function(){this.$emit("click-overlay"),this.data.closeOnClickOverlay&&this.$emit("close")},observeClass:function(){var e=this.data,s=e.transition,t=e.position;this.updateClasses(s||t),"none"===s&&this.set({duration:0})}}});
+import { VantComponent } from '../common/component';
+import { transition } from '../mixins/transition';
+import { safeArea } from '../mixins/safe-area';
+VantComponent({
+    classes: [
+        'enter-class',
+        'enter-active-class',
+        'enter-to-class',
+        'leave-class',
+        'leave-active-class',
+        'leave-to-class'
+    ],
+    mixins: [transition(false), safeArea()],
+    props: {
+        transition: {
+            type: String,
+            observer: 'observeClass'
+        },
+        customStyle: String,
+        overlayStyle: String,
+        zIndex: {
+            type: Number,
+            value: 100
+        },
+        overlay: {
+            type: Boolean,
+            value: true
+        },
+        closeOnClickOverlay: {
+            type: Boolean,
+            value: true
+        },
+        position: {
+            type: String,
+            value: 'center',
+            observer: 'observeClass'
+        }
+    },
+    created() {
+        this.observeClass();
+    },
+    methods: {
+        onClickOverlay() {
+            this.$emit('click-overlay');
+            if (this.data.closeOnClickOverlay) {
+                this.$emit('close');
+            }
+        },
+        observeClass() {
+            const { transition, position } = this.data;
+            this.updateClasses(transition || position);
+            if (transition === 'none') {
+                this.set({ duration: 0 });
+            }
+        }
+    }
+});

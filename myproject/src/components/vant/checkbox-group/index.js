@@ -1,1 +1,39 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var component_1=require("./../common/component.js");component_1.VantComponent({field:!0,relation:{name:"checkbox",type:"descendant",linked:function(e){var a=this.data,n=a.value,t=a.disabled;e.set({value:-1!==n.indexOf(e.data.name),disabled:t||e.data.disabled})}},props:{max:Number,value:Array,disabled:Boolean},watch:{value:function(e){this.getRelationNodes("../checkbox/index").forEach(function(a){a.set({value:-1!==e.indexOf(a.data.name)})})},disabled:function(e){this.getRelationNodes("../checkbox/index").forEach(function(a){a.set({disabled:e||a.data.disabled})})}}});
+import { VantComponent } from '../common/component';
+VantComponent({
+    field: true,
+    relation: {
+        name: 'checkbox',
+        type: 'descendant',
+        linked(target) {
+            this.children = this.children || [];
+            this.children.push(target);
+            this.updateChild(target);
+        },
+        unlinked(target) {
+            this.children = this.children.filter((child) => child !== target);
+        }
+    },
+    props: {
+        max: Number,
+        value: {
+            type: Array,
+            observer: 'updateChildren'
+        },
+        disabled: {
+            type: Boolean,
+            observer: 'updateChildren'
+        }
+    },
+    methods: {
+        updateChildren() {
+            (this.children || []).forEach((child) => this.updateChild(child));
+        },
+        updateChild(child) {
+            const { value, disabled } = this.data;
+            child.set({
+                value: value.indexOf(child.data.name) !== -1,
+                disabled: disabled || child.data.disabled
+            });
+        }
+    }
+});

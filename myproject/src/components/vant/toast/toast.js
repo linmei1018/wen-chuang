@@ -1,1 +1,66 @@
-"use strict";function parseOptions(t){return utils_1.isObj(t)?t:{message:t}}function getContext(){var t=getCurrentPages();return t[t.length-1]}var __assign=function(){return __assign=Object.assign||function(t){for(var e,n=1,o=arguments.length;n<o;n++){e=arguments[n];for(var s in e)Object.prototype.hasOwnProperty.call(e,s)&&(t[s]=e[s])}return t},__assign.apply(this,arguments)};Object.defineProperty(exports,"__esModule",{value:!0});var utils_1=require("./../common/utils.js"),defaultOptions={type:"text",mask:!1,message:"",show:!0,zIndex:1e3,duration:3e3,position:"middle",forbidClick:!1,loadingType:"circular",selector:"#van-toast"},queue=[],currentOptions=__assign({},defaultOptions),Toast=function(t){void 0===t&&(t={}),t=__assign({},currentOptions,parseOptions(t));var e=t.context||getContext(),n=e.selectComponent(t.selector);return n?(delete t.context,delete t.selector,queue.push(n),n.set(t),clearTimeout(n.timer),t.duration>0&&(n.timer=setTimeout(function(){n.clear(),queue=queue.filter(function(t){return t!==n})},t.duration)),n):void console.warn("未找到 van-toast 节点，请确认 selector 及 context 是否正确")},createMethod=function(t){return function(e){return Toast(__assign({type:t},parseOptions(e)))}};["loading","success","fail"].forEach(function(t){Toast[t]=createMethod(t)}),Toast.clear=function(){queue.forEach(function(t){t.clear()}),queue=[]},Toast.setDefaultOptions=function(t){Object.assign(currentOptions,t)},Toast.resetDefaultOptions=function(){currentOptions=__assign({},defaultOptions)},exports.default=Toast;
+import { isObj } from '../common/utils';
+const defaultOptions = {
+    type: 'text',
+    mask: false,
+    message: '',
+    show: true,
+    zIndex: 1000,
+    duration: 3000,
+    position: 'middle',
+    forbidClick: false,
+    loadingType: 'circular',
+    selector: '#van-toast'
+};
+let queue = [];
+let currentOptions = Object.assign({}, defaultOptions);
+function parseOptions(message) {
+    return isObj(message) ? message : { message };
+}
+function getContext() {
+    const pages = getCurrentPages();
+    return pages[pages.length - 1];
+}
+function Toast(toastOptions) {
+    const options = Object.assign({}, currentOptions, parseOptions(toastOptions));
+    const context = options.context || getContext();
+    const toast = context.selectComponent(options.selector);
+    if (!toast) {
+        console.warn('未找到 van-toast 节点，请确认 selector 及 context 是否正确');
+        return;
+    }
+    delete options.context;
+    delete options.selector;
+    toast.clear = () => {
+        toast.set({ show: false });
+        if (options.onClose) {
+            options.onClose();
+        }
+    };
+    queue.push(toast);
+    toast.set(options);
+    clearTimeout(toast.timer);
+    if (options.duration > 0) {
+        toast.timer = setTimeout(() => {
+            toast.clear();
+            queue = queue.filter(item => item !== toast);
+        }, options.duration);
+    }
+    return toast;
+}
+const createMethod = type => (options) => Toast(Object.assign({ type }, parseOptions(options)));
+Toast.loading = createMethod('loading');
+Toast.success = createMethod('success');
+Toast.fail = createMethod('fail');
+Toast.clear = () => {
+    queue.forEach(toast => {
+        toast.clear();
+    });
+    queue = [];
+};
+Toast.setDefaultOptions = (options) => {
+    Object.assign(currentOptions, options);
+};
+Toast.resetDefaultOptions = () => {
+    currentOptions = Object.assign({}, defaultOptions);
+};
+export default Toast;

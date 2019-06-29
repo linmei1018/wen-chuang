@@ -1,1 +1,44 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var component_1=require("./../common/component.js");component_1.VantComponent({field:!0,relation:{name:"radio-group",type:"ancestor"},classes:["icon-class","label-class"],props:{name:null,value:null,disabled:Boolean,labelDisabled:Boolean,labelPosition:String,checkedColor:String},methods:{emitChange:function(e){var a=this.getRelationNodes("../radio-group/index")[0]||this;a.$emit("input",e),a.$emit("change",e)},onChange:function(e){this.emitChange(e.detail.value)},onClickLabel:function(){this.data.disabled||this.data.labelDisabled||this.emitChange(this.data.name)}}});
+import { VantComponent } from '../common/component';
+VantComponent({
+    field: true,
+    relation: {
+        name: 'radio-group',
+        type: 'ancestor',
+        linked(target) {
+            this.parent = target;
+        },
+        unlinked() {
+            this.parent = null;
+        }
+    },
+    classes: ['icon-class', 'label-class'],
+    props: {
+        value: null,
+        disabled: Boolean,
+        useIconSlot: Boolean,
+        checkedColor: String,
+        labelPosition: String,
+        labelDisabled: Boolean,
+        shape: {
+            type: String,
+            value: 'round'
+        }
+    },
+    methods: {
+        emitChange(value) {
+            const instance = this.parent || this;
+            instance.$emit('input', value);
+            instance.$emit('change', value);
+        },
+        onChange(event) {
+            console.log(event);
+            this.emitChange(this.data.name);
+        },
+        onClickLabel() {
+            const { disabled, labelDisabled, name } = this.data;
+            if (!disabled && !labelDisabled) {
+                this.emitChange(name);
+            }
+        }
+    }
+});

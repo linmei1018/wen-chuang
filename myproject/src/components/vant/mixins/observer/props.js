@@ -1,1 +1,22 @@
-"use strict";function observeProps(e){e&&Object.keys(e).forEach(function(r){var s=e[r];null!==s&&"type"in s||(s={type:s});var t=s.observer;s.observer=function(){t&&("string"==typeof t&&(t=this[t]),t.apply(this,arguments)),this.set()},e[r]=s})}Object.defineProperty(exports,"__esModule",{value:!0}),exports.observeProps=observeProps;
+export function observeProps(props) {
+    if (!props) {
+        return;
+    }
+    Object.keys(props).forEach(key => {
+        let prop = props[key];
+        if (prop === null || !('type' in prop)) {
+            prop = { type: prop };
+        }
+        let { observer } = prop;
+        prop.observer = function () {
+            if (observer) {
+                if (typeof observer === 'string') {
+                    observer = this[observer];
+                }
+                observer.apply(this, arguments);
+            }
+            this.set();
+        };
+        props[key] = prop;
+    });
+}

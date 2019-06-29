@@ -1,1 +1,10 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var component_1=require("./../common/component.js");component_1.VantComponent({props:{title:String,border:{type:Boolean,value:!0}}});
+import { VantComponent } from '../common/component';
+VantComponent({
+    props: {
+        title: String,
+        border: {
+            type: Boolean,
+            value: true
+        }
+    }
+});

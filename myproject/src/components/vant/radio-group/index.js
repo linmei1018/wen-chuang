@@ -1,1 +1,38 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var component_1=require("./../common/component.js");component_1.VantComponent({field:!0,relation:{name:"radio",type:"descendant",linked:function(e){var a=this.data,n=a.value,t=a.disabled;e.set({value:n,disabled:t||e.data.disabled})}},props:{value:null,disabled:Boolean},watch:{value:function(e){this.getRelationNodes("../radio/index").forEach(function(a){a.set({value:e})})},disabled:function(e){this.getRelationNodes("../radio/index").forEach(function(a){a.set({disabled:e||a.data.disabled})})}}});
+import { VantComponent } from '../common/component';
+VantComponent({
+    field: true,
+    relation: {
+        name: 'radio',
+        type: 'descendant',
+        linked(target) {
+            this.children = this.children || [];
+            this.children.push(target);
+            this.updateChild(target);
+        },
+        unlinked(target) {
+            this.children = this.children.filter((child) => child !== target);
+        }
+    },
+    props: {
+        value: {
+            type: null,
+            observer: 'updateChildren'
+        },
+        disabled: {
+            type: Boolean,
+            observer: 'updateChildren'
+        }
+    },
+    methods: {
+        updateChildren() {
+            (this.children || []).forEach((child) => this.updateChild(child));
+        },
+        updateChild(child) {
+            const { value, disabled } = this.data;
+            child.set({
+                value,
+                disabled: disabled || child.data.disabled
+            });
+        }
+    }
+});

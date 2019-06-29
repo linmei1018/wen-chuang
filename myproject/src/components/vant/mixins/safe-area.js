@@ -1,1 +1,39 @@
-"use strict";function getSafeArea(){return new Promise(function(e,t){null!=cache?e(cache):wx.getSystemInfo({success:function(t){var a=t.model,s=t.screenHeight,o=t.statusBarHeight,n=/iphone x/i.test(a),r=/iPhone11/i.test(a)&&812===s;cache={isIPhoneX:n||r,statusBarHeight:o},e(cache)},fail:t})})}Object.defineProperty(exports,"__esModule",{value:!0});var cache=null;exports.safeArea=function(e){var t=void 0===e?{}:e,a=t.safeAreaInsetBottom,s=void 0===a||a,o=t.safeAreaInsetTop,n=void 0!==o&&o;return Behavior({properties:{safeAreaInsetTop:{type:Boolean,value:n},safeAreaInsetBottom:{type:Boolean,value:s}},created:function(){var e=this;getSafeArea().then(function(t){var a=t.isIPhoneX,s=t.statusBarHeight;e.set({isIPhoneX:a,statusBarHeight:s})})}})};
+let cache = null;
+function getSafeArea() {
+    return new Promise((resolve, reject) => {
+        if (cache != null) {
+            resolve(cache);
+        }
+        else {
+            wx.getSystemInfo({
+                success: ({ model, screenHeight, statusBarHeight }) => {
+                    const iphoneX = /iphone x/i.test(model);
+                    const iphoneNew = /iPhone11/i.test(model) && screenHeight === 812;
+                    cache = {
+                        isIPhoneX: iphoneX || iphoneNew,
+                        statusBarHeight
+                    };
+                    resolve(cache);
+                },
+                fail: reject
+            });
+        }
+    });
+}
+export const safeArea = ({ safeAreaInsetBottom = true, safeAreaInsetTop = false } = {}) => Behavior({
+    properties: {
+        safeAreaInsetTop: {
+            type: Boolean,
+            value: safeAreaInsetTop
+        },
+        safeAreaInsetBottom: {
+            type: Boolean,
+            value: safeAreaInsetBottom
+        }
+    },
+    created() {
+        getSafeArea().then(({ isIPhoneX, statusBarHeight }) => {
+            this.set({ isIPhoneX, statusBarHeight });
+        });
+    }
+});

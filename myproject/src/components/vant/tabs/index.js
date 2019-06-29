@@ -1,1 +1,312 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var component_1=require("./../common/component.js"),touch_1=require("./../mixins/touch.js");component_1.VantComponent({mixins:[touch_1.touch],classes:["nav-class","tab-class","tab-active-class","line-class"],relation:{name:"tab",type:"descendant",linked:function(t){this.child.push(t),this.updateTabs(this.data.tabs.concat(t.data))},unlinked:function(t){var e=this.child.indexOf(t),i=this.data.tabs;i.splice(e,1),this.child.splice(e,1),this.updateTabs(i)}},props:{color:String,sticky:Boolean,animated:Boolean,swipeable:Boolean,lineWidth:{type:Number,value:-1},lineHeight:{type:Number,value:-1},active:{type:Number,value:0},type:{type:String,value:"line"},border:{type:Boolean,value:!0},duration:{type:Number,value:.3},zIndex:{type:Number,value:1},swipeThreshold:{type:Number,value:4},offsetTop:{type:Number,value:0}},data:{tabs:[],lineStyle:"",scrollLeft:0,scrollable:!1,trackStyle:"",wrapStyle:"",position:""},watch:{swipeThreshold:function(){this.set({scrollable:this.child.length>this.data.swipeThreshold})},color:"setLine",lineWidth:"setLine",lineHeight:"setLine",active:"setActiveTab",animated:"setTrack",offsetTop:"setWrapStyle"},beforeCreate:function(){this.child=[]},mounted:function(){var t=this;this.setLine(!0),this.setTrack(),this.scrollIntoView(),this.getRect(".van-tabs__wrap").then(function(e){t.navHeight=e.height,t.observerContentScroll()})},destroyed:function(){this.createIntersectionObserver().disconnect()},methods:{updateTabs:function(t){t=t||this.data.tabs,this.set({tabs:t,scrollable:t.length>this.data.swipeThreshold}),this.setActiveTab()},trigger:function(t,e){this.$emit(t,{index:e,title:this.data.tabs[e].title})},onTap:function(t){var e=t.currentTarget.dataset.index;this.data.tabs[e].disabled?this.trigger("disabled",e):(this.trigger("click",e),this.setActive(e))},setActive:function(t){t!==this.data.active&&(this.trigger("change",t),this.set({active:t}),this.setActiveTab())},setLine:function(t){var e=this;if("line"===this.data.type){var i=this.data,a=i.color,n=i.active,s=i.duration,o=i.lineWidth,r=i.lineHeight;this.getRect(".van-tab",!0).then(function(i){var c=i[n],h=-1!==o?o:c.width/2,l=-1!==r?"height: "+r+"px;":"",d=i.slice(0,n).reduce(function(t,e){return t+e.width},0);d+=(c.width-h)/2;var u=t?"":"transition-duration: "+s+"s; -webkit-transition-duration: "+s+"s;";e.set({lineStyle:"\n            "+l+"\n            width: "+h+"px;\n            background-color: "+a+";\n            -webkit-transform: translateX("+d+"px);\n            transform: translateX("+d+"px);\n            "+u+"\n          "})})}},setTrack:function(){var t=this,e=this.data,i=e.animated,a=e.active,n=e.duration;if(!i)return"";this.getRect(".van-tabs__content").then(function(e){var s=e.width;t.set({trackStyle:"\n            width: "+s*t.child.length+"px;\n            left: "+-1*a*s+"px;\n            transition: left "+n+"s;\n            display: -webkit-box;\n            display: flex;\n          "});var o={width:s,animated:i};t.child.forEach(function(t){t.set(o)})})},setActiveTab:function(){var t=this;this.child.forEach(function(e,i){var a={active:i===t.data.active};a.active&&(a.inited=!0),a.active!==e.data.active&&e.set(a)}),this.set({},function(){t.setLine(),t.setTrack(),t.scrollIntoView()})},scrollIntoView:function(){var t=this,e=this.data,i=e.active;e.scrollable&&Promise.all([this.getRect(".van-tab",!0),this.getRect(".van-tabs__nav")]).then(function(e){var a=e[0],n=e[1],s=a[i],o=a.slice(0,i).reduce(function(t,e){return t+e.width},0);t.set({scrollLeft:o-(n.width-s.width)/2})})},onTouchStart:function(t){this.data.swipeable&&this.touchStart(t)},onTouchMove:function(t){this.data.swipeable&&this.touchMove(t)},onTouchEnd:function(){if(this.data.swipeable){var t=this.data,e=t.active,i=t.tabs,a=this,n=a.direction,s=a.deltaX,o=a.offsetX;"horizontal"===n&&o>=50&&(s>0&&0!==e?this.setActive(e-1):s<0&&e!==i.length-1&&this.setActive(e+1))}},setWrapStyle:function(){var t,e=this.data,i=e.offsetTop,a=e.position;switch(a){case"top":t="\n            top: "+i+"px;\n            position: fixed;\n          ";break;case"bottom":t="\n            top: auto;\n            bottom: 0;\n          ";break;default:t=""}t!==this.data.wrapStyle&&this.set({wrapStyle:t})},observerContentScroll:function(){var t=this;if(this.data.sticky){var e=this.data.offsetTop,i=wx.getSystemInfoSync().windowHeight;this.createIntersectionObserver().disconnect(),this.createIntersectionObserver().relativeToViewport({top:-(this.navHeight+e)}).observe(".van-tabs",function(i){var a=i.boundingClientRect.top;if(!(a>e)){var n=i.intersectionRatio>0?"top":"bottom";t.$emit("scroll",{scrollTop:a+e,isFixed:"top"===n}),t.setPosition(n)}}),this.createIntersectionObserver().relativeToViewport({bottom:-(i-1-e)}).observe(".van-tabs",function(i){var a=i.boundingClientRect,n=a.top;if(!(a.bottom<t.navHeight)){var s=i.intersectionRatio>0?"top":"";t.$emit("scroll",{scrollTop:n+e,isFixed:"top"===s}),t.setPosition(s)}})}},setPosition:function(t){var e=this;t!==this.data.position&&this.set({position:t}).then(function(){e.setWrapStyle()})}}});
+import { VantComponent } from '../common/component';
+import { touch } from '../mixins/touch';
+VantComponent({
+    mixins: [touch],
+    classes: ['nav-class', 'tab-class', 'tab-active-class', 'line-class'],
+    relation: {
+        name: 'tab',
+        type: 'descendant',
+        linked(child) {
+            this.child.push(child);
+            this.updateTabs(this.data.tabs.concat(child.data));
+        },
+        unlinked(child) {
+            const index = this.child.indexOf(child);
+            const { tabs } = this.data;
+            tabs.splice(index, 1);
+            this.child.splice(index, 1);
+            this.updateTabs(tabs);
+        }
+    },
+    props: {
+        color: String,
+        sticky: Boolean,
+        animated: Boolean,
+        swipeable: Boolean,
+        lineWidth: {
+            type: Number,
+            value: -1
+        },
+        lineHeight: {
+            type: Number,
+            value: -1
+        },
+        active: {
+            type: Number,
+            value: 0
+        },
+        type: {
+            type: String,
+            value: 'line'
+        },
+        border: {
+            type: Boolean,
+            value: true
+        },
+        duration: {
+            type: Number,
+            value: 0.3
+        },
+        zIndex: {
+            type: Number,
+            value: 1
+        },
+        swipeThreshold: {
+            type: Number,
+            value: 4
+        },
+        offsetTop: {
+            type: Number,
+            value: 0
+        }
+    },
+    data: {
+        tabs: [],
+        lineStyle: '',
+        scrollLeft: 0,
+        scrollable: false,
+        trackStyle: '',
+        wrapStyle: '',
+        position: ''
+    },
+    watch: {
+        swipeThreshold() {
+            this.set({
+                scrollable: this.child.length > this.data.swipeThreshold
+            });
+        },
+        color: 'setLine',
+        lineWidth: 'setLine',
+        lineHeight: 'setLine',
+        active: 'setActiveTab',
+        animated: 'setTrack',
+        offsetTop: 'setWrapStyle'
+    },
+    beforeCreate() {
+        this.child = [];
+    },
+    mounted() {
+        this.setLine(true);
+        this.setTrack();
+        this.scrollIntoView();
+        this.getRect('.van-tabs__wrap').then((rect) => {
+            this.navHeight = rect.height;
+            this.observerContentScroll();
+        });
+    },
+    destroyed() {
+        this.createIntersectionObserver().disconnect();
+    },
+    methods: {
+        updateTabs(tabs) {
+            tabs = tabs || this.data.tabs;
+            this.set({
+                tabs,
+                scrollable: tabs.length > this.data.swipeThreshold
+            });
+            this.setActiveTab();
+        },
+        trigger(eventName, index) {
+            this.$emit(eventName, {
+                index,
+                title: this.data.tabs[index].title
+            });
+        },
+        onTap(event) {
+            const { index } = event.currentTarget.dataset;
+            if (this.data.tabs[index].disabled) {
+                this.trigger('disabled', index);
+            }
+            else {
+                this.trigger('click', index);
+                this.setActive(index);
+            }
+        },
+        setActive(active) {
+            if (active !== this.data.active) {
+                this.trigger('change', active);
+                this.set({ active });
+                this.setActiveTab();
+            }
+        },
+        setLine(skipTransition) {
+            if (this.data.type !== 'line') {
+                return;
+            }
+            const { color, active, duration, lineWidth, lineHeight } = this.data;
+            this.getRect('.van-tab', true).then((rects) => {
+                const rect = rects[active];
+                const width = lineWidth !== -1 ? lineWidth : rect.width / 2;
+                const height = lineHeight !== -1 ? `height: ${lineHeight}px;` : '';
+                let left = rects
+                    .slice(0, active)
+                    .reduce((prev, curr) => prev + curr.width, 0);
+                left += (rect.width - width) / 2;
+                const transition = skipTransition
+                    ? ''
+                    : `transition-duration: ${duration}s; -webkit-transition-duration: ${duration}s;`;
+                this.set({
+                    lineStyle: `
+            ${height}
+            width: ${width}px;
+            background-color: ${color};
+            -webkit-transform: translateX(${left}px);
+            transform: translateX(${left}px);
+            ${transition}
+          `
+                });
+            });
+        },
+        setTrack() {
+            const { animated, active, duration } = this.data;
+            if (!animated)
+                return '';
+            this.getRect('.van-tabs__content').then((rect) => {
+                const { width } = rect;
+                this.set({
+                    trackStyle: `
+            width: ${width * this.child.length}px;
+            left: ${-1 * active * width}px;
+            transition: left ${duration}s;
+            display: -webkit-box;
+            display: flex;
+          `
+                });
+                const props = { width, animated };
+                this.child.forEach((item) => {
+                    item.set(props);
+                });
+            });
+        },
+        setActiveTab() {
+            this.child.forEach((item, index) => {
+                const data = {
+                    active: index === this.data.active
+                };
+                if (data.active) {
+                    data.inited = true;
+                }
+                if (data.active !== item.data.active) {
+                    item.set(data);
+                }
+            });
+            this.set({}, () => {
+                this.setLine();
+                this.setTrack();
+                this.scrollIntoView();
+            });
+        },
+        // scroll active tab into view
+        scrollIntoView() {
+            const { active, scrollable } = this.data;
+            if (!scrollable) {
+                return;
+            }
+            Promise.all([
+                this.getRect('.van-tab', true),
+                this.getRect('.van-tabs__nav')
+            ]).then(([tabRects, navRect]) => {
+                const tabRect = tabRects[active];
+                const offsetLeft = tabRects
+                    .slice(0, active)
+                    .reduce((prev, curr) => prev + curr.width, 0);
+                this.set({
+                    scrollLeft: offsetLeft - (navRect.width - tabRect.width) / 2
+                });
+            });
+        },
+        onTouchStart(event) {
+            if (!this.data.swipeable)
+                return;
+            this.touchStart(event);
+        },
+        onTouchMove(event) {
+            if (!this.data.swipeable)
+                return;
+            this.touchMove(event);
+        },
+        // watch swipe touch end
+        onTouchEnd() {
+            if (!this.data.swipeable)
+                return;
+            const { active, tabs } = this.data;
+            const { direction, deltaX, offsetX } = this;
+            const minSwipeDistance = 50;
+            if (direction === 'horizontal' && offsetX >= minSwipeDistance) {
+                if (deltaX > 0 && active !== 0) {
+                    this.setActive(active - 1);
+                }
+                else if (deltaX < 0 && active !== tabs.length - 1) {
+                    this.setActive(active + 1);
+                }
+            }
+        },
+        setWrapStyle() {
+            const { offsetTop, position } = this.data;
+            let wrapStyle;
+            switch (position) {
+                case 'top':
+                    wrapStyle = `
+            top: ${offsetTop}px;
+            position: fixed;
+          `;
+                    break;
+                case 'bottom':
+                    wrapStyle = `
+            top: auto;
+            bottom: 0;
+          `;
+                    break;
+                default:
+                    wrapStyle = '';
+            }
+            // cut down `set`
+            if (wrapStyle === this.data.wrapStyle)
+                return;
+            this.set({ wrapStyle });
+        },
+        observerContentScroll() {
+            if (!this.data.sticky) {
+                return;
+            }
+            const { offsetTop } = this.data;
+            const { windowHeight } = wx.getSystemInfoSync();
+            this.createIntersectionObserver().disconnect();
+            this.createIntersectionObserver()
+                .relativeToViewport({ top: -(this.navHeight + offsetTop) })
+                .observe('.van-tabs', (res) => {
+                const { top } = res.boundingClientRect;
+                if (top > offsetTop) {
+                    return;
+                }
+                const position = res.intersectionRatio > 0 ? 'top' : 'bottom';
+                this.$emit('scroll', {
+                    scrollTop: top + offsetTop,
+                    isFixed: position === 'top'
+                });
+                this.setPosition(position);
+            });
+            this.createIntersectionObserver()
+                .relativeToViewport({ bottom: -(windowHeight - 1 - offsetTop) })
+                .observe('.van-tabs', (res) => {
+                const { top, bottom } = res.boundingClientRect;
+                if (bottom < this.navHeight) {
+                    return;
+                }
+                const position = res.intersectionRatio > 0 ? 'top' : '';
+                this.$emit('scroll', {
+                    scrollTop: top + offsetTop,
+                    isFixed: position === 'top'
+                });
+                this.setPosition(position);
+            });
+        },
+        setPosition(position) {
+            if (position !== this.data.position) {
+                this.set({ position }).then(() => {
+                    this.setWrapStyle();
+                });
+            }
+        }
+    }
+});

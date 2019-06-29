@@ -1,1 +1,59 @@
-"use strict";function getContext(){var e=getCurrentPages();return e[e.length-1]}var __assign=function(){return __assign=Object.assign||function(e){for(var t,n=1,o=arguments.length;n<o;n++){t=arguments[n];for(var i in t)Object.prototype.hasOwnProperty.call(t,i)&&(e[i]=t[i])}return e},__assign.apply(this,arguments)};Object.defineProperty(exports,"__esModule",{value:!0});var queue=[],Dialog=function e(t){return t=__assign({},e.currentOptions,t),new Promise(function(e,n){var o=t.context||getContext(),i=o.selectComponent(t.selector);delete t.selector,i?(i.set(__assign({onCancel:n,onConfirm:e},t)),queue.push(i)):console.warn("未找到 van-dialog 节点，请确认 selector 及 context 是否正确")})};Dialog.defaultOptions={show:!0,title:"",message:"",zIndex:100,overlay:!0,asyncClose:!1,messageAlign:"",transition:"scale",selector:"#van-dialog",confirmButtonText:"确认",cancelButtonText:"取消",showConfirmButton:!0,showCancelButton:!1,closeOnClickOverlay:!1,confirmButtonOpenType:""},Dialog.alert=Dialog,Dialog.confirm=function(e){return Dialog(__assign({showCancelButton:!0},e))},Dialog.close=function(){queue.forEach(function(e){e.close()}),queue=[]},Dialog.stopLoading=function(){queue.forEach(function(e){e.stopLoading()})},Dialog.setDefaultOptions=function(e){Object.assign(Dialog.currentOptions,e)},Dialog.resetDefaultOptions=function(){Dialog.currentOptions=__assign({},Dialog.defaultOptions)},Dialog.resetDefaultOptions(),exports.default=Dialog;
+let queue = [];
+function getContext() {
+    const pages = getCurrentPages();
+    return pages[pages.length - 1];
+}
+const Dialog = options => {
+    options = Object.assign({}, Dialog.currentOptions, options);
+    return new Promise((resolve, reject) => {
+        const context = options.context || getContext();
+        const dialog = context.selectComponent(options.selector);
+        delete options.selector;
+        if (dialog) {
+            dialog.set(Object.assign({ onCancel: reject, onConfirm: resolve }, options));
+            queue.push(dialog);
+        }
+        else {
+            console.warn('未找到 van-dialog 节点，请确认 selector 及 context 是否正确');
+        }
+    });
+};
+Dialog.defaultOptions = {
+    show: true,
+    title: '',
+    message: '',
+    zIndex: 100,
+    overlay: true,
+    className: '',
+    asyncClose: false,
+    messageAlign: '',
+    transition: 'scale',
+    selector: '#van-dialog',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    showConfirmButton: true,
+    showCancelButton: false,
+    closeOnClickOverlay: false,
+    confirmButtonOpenType: ''
+};
+Dialog.alert = Dialog;
+Dialog.confirm = options => Dialog(Object.assign({ showCancelButton: true }, options));
+Dialog.close = () => {
+    queue.forEach(dialog => {
+        dialog.close();
+    });
+    queue = [];
+};
+Dialog.stopLoading = () => {
+    queue.forEach(dialog => {
+        dialog.stopLoading();
+    });
+};
+Dialog.setDefaultOptions = options => {
+    Object.assign(Dialog.currentOptions, options);
+};
+Dialog.resetDefaultOptions = () => {
+    Dialog.currentOptions = Object.assign({}, Dialog.defaultOptions);
+};
+Dialog.resetDefaultOptions();
+export default Dialog;

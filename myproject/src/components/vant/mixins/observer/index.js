@@ -1,1 +1,27 @@
-"use strict";function observe(e,r){var o=e.watch,s=e.computed;if(r.behaviors.push(behavior_1.behavior),o){var p=r.properties||{};Object.keys(o).forEach(function(e){if(e in p){var r=p[e];null!==r&&"type"in r||(r={type:r}),r.observer=o[e],p[e]=r}}),r.properties=p}s&&(r.methods=r.methods||{},r.methods.$options=function(){return e},r.properties&&props_1.observeProps(r.properties))}Object.defineProperty(exports,"__esModule",{value:!0});var behavior_1=require("./behavior.js"),props_1=require("./props.js");exports.observe=observe;
+import { behavior } from './behavior';
+import { observeProps } from './props';
+export function observe(vantOptions, options) {
+    const { watch, computed } = vantOptions;
+    options.behaviors.push(behavior);
+    if (watch) {
+        const props = options.properties || {};
+        Object.keys(watch).forEach(key => {
+            if (key in props) {
+                let prop = props[key];
+                if (prop === null || !('type' in prop)) {
+                    prop = { type: prop };
+                }
+                prop.observer = watch[key];
+                props[key] = prop;
+            }
+        });
+        options.properties = props;
+    }
+    if (computed) {
+        options.methods = options.methods || {};
+        options.methods.$options = () => vantOptions;
+        if (options.properties) {
+            observeProps(options.properties);
+        }
+    }
+}

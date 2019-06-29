@@ -1,1 +1,29 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var component_1=require("./../common/component.js");component_1.VantComponent({props:{show:Boolean,mask:Boolean,message:String,forbidClick:Boolean,zIndex:{type:Number,value:1e3},type:{type:String,value:"text"},loadingType:{type:String,value:"circular"},position:{type:String,value:"middle"}},methods:{clear:function(){this.set({show:!1})},noop:function(){}}});
+import { VantComponent } from '../common/component';
+VantComponent({
+    props: {
+        show: Boolean,
+        mask: Boolean,
+        message: String,
+        forbidClick: Boolean,
+        zIndex: {
+            type: Number,
+            value: 1000
+        },
+        type: {
+            type: String,
+            value: 'text'
+        },
+        loadingType: {
+            type: String,
+            value: 'circular'
+        },
+        position: {
+            type: String,
+            value: 'middle'
+        }
+    },
+    methods: {
+        // for prevent touchmove
+        noop() { }
+    }
+});

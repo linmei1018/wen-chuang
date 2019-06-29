@@ -1,1 +1,25 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.openType=Behavior({properties:{openType:String},methods:{bindGetUserInfo:function(e){this.$emit("getuserinfo",e.detail)},bindContact:function(e){this.$emit("contact",e.detail)},bindGetPhoneNumber:function(e){this.$emit("getphonenumber",e.detail)},bindError:function(e){this.$emit("error",e.detail)},bindLaunchApp:function(e){this.$emit("launchapp",e.detail)},bindOpenSetting:function(e){this.$emit("opensetting",e.detail)}}});
+export const openType = Behavior({
+    properties: {
+        openType: String
+    },
+    methods: {
+        bindGetUserInfo(event) {
+            this.$emit('getuserinfo', event.detail);
+        },
+        bindContact(event) {
+            this.$emit('contact', event.detail);
+        },
+        bindGetPhoneNumber(event) {
+            this.$emit('getphonenumber', event.detail);
+        },
+        bindError(event) {
+            this.$emit('error', event.detail);
+        },
+        bindLaunchApp(event) {
+            this.$emit('launchapp', event.detail);
+        },
+        bindOpenSetting(event) {
+            this.$emit('opensetting', event.detail);
+        },
+    }
+});
