@@ -2,64 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d948aaa4-8b2d-4e1b-838f-9556162bda40" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/myproject/src/pages/shoppingDetail.wpy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/app.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/app.wpy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/button/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/button/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/cell-group/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/cell-group/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/cell/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/cell/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/cell/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/cell/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/checkbox-group/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/checkbox-group/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/checkbox/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/checkbox/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/checkbox/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/checkbox/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/common/color.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/common/color.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/common/component.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/common/component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/common/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/common/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/dialog/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/dialog/dialog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/dialog/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/dialog/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/dialog/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/dialog/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/field/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/field/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/field/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/field/index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/field/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/field/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/field/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/field/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/icon/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/icon/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/icon/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/icon/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/info/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/info/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/info/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/info/index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/info/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/info/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/loading/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/loading/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/basic.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/basic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/button.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/button.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/link.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/link.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/observer/behavior.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/observer/behavior.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/observer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/observer/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/observer/props.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/observer/props.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/open-type.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/open-type.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/safe-area.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/safe-area.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/touch.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/touch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/mixins/transition.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/mixins/transition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/nav-bar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/nav-bar/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/overlay/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/overlay/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/overlay/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/overlay/index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/overlay/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/overlay/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/popup/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/popup/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/popup/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/popup/index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/popup/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/popup/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/radio-group/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/radio-group/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/radio/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/radio/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/radio/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/radio/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/radio/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/radio/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/search/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/search/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/search/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/search/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/tab/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/tab/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/tabs/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/tabs/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/toast/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/toast/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/toast/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/toast/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/toast/toast.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/toast/toast.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/transition/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/transition/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/transition/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/transition/index.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/components/vant/transition/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/components/vant/transition/index.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/pages/index.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/pages/index.wpy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/src/pages/shoppingDetail.wpy" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/pages/shoppingDetail.wpy" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -76,7 +20,7 @@
       <file leaf-file-name="app.wpy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myproject/src/app.wpy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
+            <state relative-caret-position="506">
               <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
               <folding>
                 <element signature="e#196#219#0" expanded="true" />
@@ -106,11 +50,8 @@
       <file leaf-file-name="index.wpy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myproject/src/pages/index.wpy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="89" column="20" selection-start-line="89" selection-start-column="20" selection-end-line="89" selection-end-column="20" />
-              <folding>
-                <element signature="e#1554#1723#0" />
-              </folding>
+            <state relative-caret-position="814">
+              <caret line="61" column="56" lean-forward="true" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -118,13 +59,27 @@
       <file leaf-file-name="shoppingDetail.wpy" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myproject/src/pages/shoppingDetail.wpy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="2" column="84" selection-start-line="2" selection-start-column="84" selection-end-line="2" selection-end-column="84" />
+            <state relative-caret-position="522">
+              <caret line="199" column="30" selection-start-line="199" selection-start-column="30" selection-end-line="199" selection-end-column="30" />
+              <folding>
+                <element signature="n#style#0;n#image#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#view#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#swiper#0;n#view#0;n#view#0;n#template#0;n#!!top" />
+                <element signature="n#style#0;n#view#0;n#swiper-item#0;n#swiper#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#van-col#2;n#van-row#0;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>1</find>
+      <find>stop</find>
+      <find>videoPlay</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -150,7 +105,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/myproject/node_modules" />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="width" value="1914" />
     <option name="height" value="1080" />
   </component>
@@ -207,7 +162,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wepy-mall-master" />
+    <property name="last_opened_file_path" value="F:/Document-demo/nc-association-main" />
     <property name="node.js.detected.package.prettier" value="true" />
     <property name="node.js.path.for.package.prettier" value="project" />
     <property name="node.js.selected.package.prettier" value="" />
@@ -239,12 +194,13 @@
       <workItem from="1561606367964" duration="11106000" />
       <workItem from="1561686903532" duration="1251000" />
       <workItem from="1561688615904" duration="3715000" />
-      <workItem from="1561778626486" duration="12156000" />
+      <workItem from="1561778626486" duration="12360000" />
+      <workItem from="1561946660115" duration="13812000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28228000" />
+    <option name="totallyTimeSpent" value="42244000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1914" height="1080" extended-state="0" />
@@ -257,7 +213,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32943678" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.15834218" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.25292242" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -304,6 +260,51 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/myproject/src/app.wpy">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+          <folding>
+            <element signature="e#196#219#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myproject/src/pages/user.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myproject/src/pages/ShoppingMall.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myproject/src/pages/index.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1958">
+          <caret line="89" column="20" selection-start-line="89" selection-start-column="20" selection-end-line="89" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myproject/src/pages/shoppingDetail.wpy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="n#style#0;n#image#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#swiper#0;n#view#0;n#view#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#view#0;n#swiper-item#0;n#swiper#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#van-col#2;n#van-row#0;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myproject/src/app.wpy">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
           <folding>
@@ -330,9 +331,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
           <caret line="25" column="48" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="48" />
-          <folding>
-            <element signature="e#1554#1723#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -364,9 +362,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#1554#1723#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -424,7 +419,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myproject/src/app.wpy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
+        <state relative-caret-position="506">
           <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
           <folding>
             <element signature="e#196#219#0" expanded="true" />
@@ -434,18 +429,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myproject/src/pages/index.wpy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="89" column="20" selection-start-line="89" selection-start-column="20" selection-end-line="89" selection-end-column="20" />
-          <folding>
-            <element signature="e#1554#1723#0" />
-          </folding>
+        <state relative-caret-position="814">
+          <caret line="61" column="56" lean-forward="true" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myproject/src/pages/shoppingDetail.wpy">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="84" selection-start-line="2" selection-start-column="84" selection-end-line="2" selection-end-column="84" />
+        <state relative-caret-position="522">
+          <caret line="199" column="30" selection-start-line="199" selection-start-column="30" selection-end-line="199" selection-end-column="30" />
+          <folding>
+            <element signature="n#style#0;n#image#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#view#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#swiper#0;n#view#0;n#view#0;n#template#0;n#!!top" />
+            <element signature="n#style#0;n#view#0;n#swiper-item#0;n#swiper#0;n#view#0;n#view#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#van-col#2;n#van-row#0;n#view#1;n#view#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
