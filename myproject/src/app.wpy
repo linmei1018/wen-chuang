@@ -26,6 +26,8 @@ export default class extends wepy.app {
       'pages/ShoppingMall',
       'pages/user',
       'pages/shoppingDetail',
+      'pages/release',
+      'pages/editUserInfo'
     ],
     window: {
       backgroundTextStyle: 'light',

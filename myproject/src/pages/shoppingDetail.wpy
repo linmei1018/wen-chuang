@@ -9,7 +9,7 @@
       <van-button round type="default" size="mini" class="followBtn">关注</van-button>
       <swiper class="swiper" indicator-dots="true" autoplay="{{flag}}" interval="5000" duration="1000">
         <swiper-item>
-          <view  class="cover" style="display:{{ _index === index ? 'none' : 'block' }};" bindtap="videoPlay">
+          <view id="{{index}}" class="cover" style="display: {{ _index == index ? 'none' : 'block' }};" bindtap="videoPlay">
             <!-- 视频图层 -->
             <image class="videoVideo2" src="{{item.img}}" mode="scaleToFill">
               <!-- 视频按钮 -->
@@ -17,10 +17,10 @@
             </image>
           </view>
           <!-- 视频 -->
-          <video src="{{item.url}}" class='video'>
+          <video src="{{item.url}}" id="{{index}}" class='video' wx:if="{{_index == index}}">
           </video>
         </swiper-item>
-        <block wx:for="{{item.movies}}" wx:for-index="index">
+        <block wx:for="{{item.movies}}" wx:key="index">
           <swiper-item>
             <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>
           </swiper-item>
@@ -30,9 +30,15 @@
     <text class='text'>{{item.content}}</text>
     <view class="item_rows">
       <van-row>
-        <van-col span="5"><van-icon name="like-o" size="30rpx" />{{item.like}}</van-col>
-        <van-col span="5"><van-icon name="share" size="30rpx" />{{item.Forward}}</van-col>
-        <van-col span="14" style="text-align: right"><van-icon name="star-o" size="30rpx" />{{item.Collection}}</van-col>
+        <van-col span="5">
+          <van-icon name="{{ newsTab === index && item.Like ? 'like':'like-o'}}" size="30rpx" color="{{ newsTab === index && item.Like ? 'red':'#1F1F1F' }}" bind:click="changeLike({{index}})" />
+          {{item.like}}
+        </van-col>
+        <van-col span="5"><button class="share-button" open-type="share" plain="true" ><van-icon name="share" size="30rpx" /></button> {{item.Forward}}</van-col>
+        <van-col span="14" style="text-align: right">
+          <van-icon name="{{ newsTab2 === index && item.star ? 'star':'stare-o'}}" color="{{ newsTab2 === index && item.star ? 'red':'#1F1F1F' }}" size="30rpx" bind:click="changeStar({{index}}" />
+          {{item.Collection}}
+        </van-col>
       </van-row>
     </view>
   </view>
@@ -46,60 +52,110 @@
       navigationBarTitleText: '笔记详情',
       usingComponents: {
         'van-icon': '../components/vant/icon/index',
-        "van-button": '../components/vant/button/index',
-        "van-row": "../components/vant/row/index",
-        "van-col": "../components/vant/col/index"
+        'van-button': '../components/vant/button/index',
+        'van-row': '../components/vant/row/index',
+        'van-col': '../components/vant/col/index'
       }
     }
     data = {
+      changeLike: false,
+      changeStar: false,
+      newsTab: '0',
+      newsTab2: '0',
       videoPlay: null,
-      vedio_data: [{
-        title: '美少女日志',
-        url: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
-        img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1437596250,215562873&fm=26&gp=0.jpg',
-        movies: [
-          { url: '../assets/3.png' },
-          { url: '../assets/4.png' },
-          { url: '../assets/5.png' }
-        ],
-        content: '马上就要搬新家啦好开心啊~',
-        like: '123',
-        Forward: '12',
-        Collection: '55'
-      }, {
-        title: '美少女日志',
-        url: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
-        img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545625549289&di=4bf95a6bd0d05003dea5598aa516f718&imgtype=0&src=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F7cec9a37f417277ec1bb62840da6b9d9c2c22f05.jpg',
-        movies: [
-          { url: '../assets/7.png' },
-          { url: '../assets/6.png' },
-          { url: '../assets/8.png' }
-        ],
-        content: '我特别喜欢这样的温馨感觉',
-        like: '123',
-        Forward: '12',
-        Collection: '55'
-      }],
+      vedio_data: [
+        {
+          title: '美少女日志',
+          url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+          img: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1437596250,215562873&fm=26&gp=0.jpg',
+          movies: [
+            { url: '../assets/3.png' },
+            { url: '../assets/4.png' },
+            { url: '../assets/5.png' }
+          ],
+          content: '马上就要搬新家啦好开心啊~',
+          like: '123',
+          Forward: '12',
+          Collection: '55',
+          Like: false,
+          star: false
+        },
+        {
+          title: '美少女日志',
+          url: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+          img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545625549289&di=4bf95a6bd0d05003dea5598aa516f718&imgtype=0&src=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F7cec9a37f417277ec1bb62840da6b9d9c2c22f05.jpg',
+          movies: [
+            { url: '../assets/7.png' },
+            { url: '../assets/6.png' },
+            { url: '../assets/8.png' }
+          ],
+          content: '我特别喜欢这样的温馨感觉',
+          like: '123',
+          Forward: '12',
+          Collection: '55',
+          Like: false,
+          star: false
+        }
+      ],
     }
     methods = {
       // 点击cover播放，其它视频结束
       videoPlay: function(e) {
-        var _index = e.currentTarget.id
+        let _index = e.currentTarget.id
         this.setData({
           _index: _index
         })
-        //停止正在播放的视频
-        var videoContextPrev = wepy.createVideoContext(this.data._index)
-        videoContextPrev.stop();
-        setTimeout(function() {
-          //将点击视频进行播放
-          var videoContext = wepy.createVideoContext(_index)
-          videoContext.play();
-        }, 500)
+        // //停止正在播放的视频
+        // let videoContextPrev = wepy.createVideoContext(this.data._index)
+        // videoContextPrev.pause();
+        // setTimeout(function() {
+        //   //将点击视频进行播放
+        //   let videoContext = wepy.createVideoContext(_index)
+        //   videoContext.play();
+        // }, 500)
+      },
+      changeLike (i) {
+        this.newsTab = i
+        this.vedio_data.forEach((item) => {
+          item.Like = !item.Like
+          this.$apply()
+        })
+
+        this.$apply()
+      },
+      changeStar (i) {
+        this.newsTab2 = i
+        this.$apply()
+        this.vedio_data.forEach((item) => {
+          item.star = !item.star
+          this.$apply()
+        })
       }
     }
-    onReady() {
 
+    onLoad () {
+      wepy.showShareMenu();
+      console.log("显示了当前页面的转发按钮");
+    }
+    onShareAppMessage ( res ){console.log(res)
+      if (res.from === 'button') {
+        console.log("来自页面内转发按钮");
+        console.log(res.target);
+      }
+      else {
+        console.log("来自右上角转发菜单")
+      }
+      return {
+        title: '转发的标题',  // 默认是小程序的名称(可以写slogan等)
+        path: '/pages/ShoppingMall',        // 默认是当前页面，必须是以‘/’开头的完整路径
+        imageUrl: '',     //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
+        success: (res) => {
+          console.log("转发成功", res);
+        },
+        fail: (res) => {
+          console.log("转发失败", res);
+        }
+      }
     }
   }
 </script>
@@ -162,9 +218,6 @@
 .video {
   width: 100%;
   height: 450rpx;
-  margin-top: 20rpx;
-  border-bottom-left-radius: 15rpx;
-  border-bottom-right-radius: 15rpx;
 }
 .videoVideo2 {
   width: 100%;
@@ -198,6 +251,13 @@
     background-color: #f1f3f4;
     font-size: 28rpx;
     border: 1px solid #616161;
+  }
+  button[plain]{
+    border: 0;
+    padding: 0;
+    line-height: 0;
+    text-align: left;
+    display: inline-block;
   }
 
 </style>

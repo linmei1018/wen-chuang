@@ -1,0 +1,275 @@
+<style lang="less">
+  /*选择图片View*/
+
+  .addImv {
+    background-color: white;
+    /* border: 1px dashed gray; */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 5rpx;
+    padding: 30rpx 0 30rpx 40rpx;
+  }
+
+  .upImv {
+    background-color: white;
+    width: 100%;
+    margin-top: 5rpx;
+  }
+
+  .upImv_text {
+    font-size: 30rpx;
+    margin-left: 20rpx;
+    padding-top: 20rpx;
+  }
+
+  /*添加图片*/
+  .addImv .chooseView {
+    width: 150rpx;
+    height: 150rpx;
+    /*margin: 20rpx 20rpx;*/
+    background-color: #f2f6f9;
+    border: 1px dashed lightgray;
+    text-align: center;
+    line-height: 150rpx;
+    border-radius: 5px;
+  }
+
+  .addImv .chooseImv {
+    width: 50rpx;
+    height: 50rpx;
+  }
+
+  /*已选择的图片*/
+
+  .addImv .upFile {
+    width: 150rpx;
+    height: 150rpx;
+    position: relative;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+    border: 1px solid #c0ccda;
+  }
+
+  .addImv .upFile .itemImv {
+    width: 100%;
+    height: 100%;
+  }
+
+  .addImv .upFile .closeImv {
+    position: absolute;
+    right: 0rpx;
+    top: 0rpx;
+    width: 50rpx;
+    height: 50rpx;
+  }
+  /*信息*/
+.info_item {
+  border-bottom: 1px solid #DEDEDE;
+  font-size: 28rpx;
+  color: #8A8A8A;
+  display: block;
+  line-height: 50rpx;
+}
+  .info_title {
+    font-size: 32rpx;
+  }
+  .info_content {
+    min-height: 200rpx;
+  }
+  .address_cell .van-cell,.info_title .van-cell {
+    color: #8A8A8A;
+    padding: 10px 0;
+  }
+  .address_btn .van-button--default {
+    color: #8A8A8A;
+    background-color: #DEDEDE;
+    margin-right: 20rpx;
+  }
+  .commit_btn .van-button--default {
+    background-color: #BCA287;
+    color: #fff;
+  }
+  .info_content textarea {
+    width: 100%;
+    height: 180rpx;
+  }
+</style>
+<template>
+  <view class="addImv">
+    <!--这个是已经选好的图片-->
+    <view wx:for="{{banner}}" wx:key="key" class="upFile" @tap="showImageBanner" style="border-radius: 5px" data-id="{{index}}">
+      <image class="itemImv" src="{{item}}"></image>
+      <van-icon class="closeImv" data-id="{{index}}"  @tap.stop="deleteImvBanner" name="clear" />
+    </view>
+    <!--这个是选择图片-->
+    <view class="chooseView" @tap="chooseBanner" style="border-radius: 5px" wx:if="{{chooseViewShowBanner}}">
+      <van-icon color="#ddd" class="chooseImv" name="plus" />
+    </view>
+  </view>
+  <view style="padding: 30rpx;">
+    <van-field
+      class="info_item info_title"
+      value="{{ value }}"
+      placeholder="加个标题会更多赞哦~"
+      border="{{ false }}"
+      bind:change="onChange"
+    />
+    <view class="info_item info_content">
+      <textarea bindblur="bindTextAreaBlur" maxlength="{{maxlength}}" placeholder="说说此刻的心情……" placeholder-style="color: #8A8A8A;font-size: 28rpx" />
+    </view>
+    <van-cell border="{{border}}" title="添加地点" v-model="read" icon="location-o" is-link class="address_cell" @tap="sreaSelect" />
+    <view style="border-bottom: 1px solid #DEDEDE;padding-bottom: 20rpx;margin-bottom: 100rpx;">
+      <van-button size="mini" round type="default" class="address_btn">迷你按钮</van-button>
+      <van-button size="mini" round type="default" class="address_btn">迷你按钮</van-button>
+      <van-button size="mini" round type="default" class="address_btn">迷你按钮</van-button>
+    </view>
+    <van-button size="large" round type="default" class="commit_btn">发布</van-button>
+    <van-popup
+      show="{{ showModal }}"
+      position="bottom"
+      overlay="{{ false }}"
+      bind:close="onClose"
+    >
+      <van-area
+        value="{{ areaValue }}"
+        loading="{{ loading }}"
+        area-list="{{ areaList }}"
+        bind:change="onChange"
+        bind:confirm="onConfirm"
+        bind:cancel="onCancel"
+      />
+    </van-popup>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import Toast from '../components/vant/toast/index';
+
+  export default class Release extends wepy.page {
+    config = {
+      navigationBarTitleText: '发布',
+      usingComponents: {
+        'van-tab': '../components/vant/tab/index',
+        'van-tabs': '../components/vant/tabs/index',
+        'van-cell': '../components/vant/cell/index',
+        'van-cell-group': '../components/vant/cell-group/index',
+        'van-icon': '../components/vant/icon/index',
+        'van-button': '../components/vant/button/index',
+        'van-field': '../components/vant/field/index',
+        'van-area': '../components/vant/area/index',
+        'van-toast': '../components/vant/toast/index',
+        'van-popup': '../components/vant/popup/index',
+        'van-picker': '../components/vant/picker/index'
+      }
+    }
+    data = {
+      value: '',
+      banner: [], // 轮播图片
+      chooseViewShowBanner: true,
+      border: false,
+      maxlength: 200,
+      areaList: {},
+      loading: false,
+      areaValue: 330302,
+      showModal: false,
+    }
+
+    methods = {
+      sreaSelect () {
+        this.showModal = true;
+        wepy.request({
+          url: 'https://cashier.youzan.com/wsctrade/uic/address/getAllRegion.json',
+          success: function(res) {console.log(res)
+            this.setData({
+              areaList: res.data.data
+            });
+          }
+        });
+      },
+      onChange (event) {
+        const { values } = event.detail;
+
+        Toast(values.map(item => item.name).join('-'));
+      },
+
+      onConfirm (event) {
+        console.log(event);
+      },
+
+      onCancel (event) {
+        console.log(event);
+      },
+      // /** 选择图片Banner */
+      chooseBanner: function() {
+        let that = this;
+        if (this.banner.length < 9) {
+          wepy.chooseImage({
+            count: 9 - that.banner.length, // 最多选择9张图片- that.banner.length,
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function(res) {
+              // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+              if (res.tempFilePaths.count === 0) {
+                return;
+              }
+              //上传图片
+              let imgArrNow = that.banner;
+              imgArrNow = imgArrNow.concat(res.tempFilePaths);
+              that.banner = imgArrNow
+              that.$apply()
+              that.chooseViewShowBanners()
+            }
+          })
+        } else {
+          wepy.showToast({
+            title: '限制选择9个文件',
+            icon: 'loading',
+            duration: 1000
+          })
+        }
+      },
+
+      // /** 删除图片Banner */
+      deleteImvBanner: function(e) {
+        let banner = this.banner;
+        let itemIndex = e.currentTarget.dataset.id;
+        banner.splice(itemIndex, 1);
+        this.setData({
+          banner: banner
+        })
+        // 判断是否隐藏选择图片
+        this.chooseViewShowBanners();
+      },
+
+      // /** 查看大图Banner */
+      showImageBanner: function(e) {
+        let banner = this.banner;
+        let itemIndex = e.currentTarget.dataset.id;
+        console.log("itemIndex:" + JSON.stringify(e))
+        wepy.previewImage({
+          current: banner[itemIndex], // 当前显示图片的http链接
+          urls: banner // 需要预览的图片http链接列表
+        })
+      }
+
+
+    }
+    // /** 是否隐藏图片选择Banner*/
+    chooseViewShowBanners() {
+      if (this.banner.length >= 9) {
+        this.setData({
+          chooseViewShowBanner: false
+        })
+      } else {
+        this.setData({
+          chooseViewShowBanner: true
+        })
+      }
+    }
+
+    async onLoad() {
+
+    }
+  }
+</script>

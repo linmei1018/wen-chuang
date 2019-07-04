@@ -1,17 +1,121 @@
+<style lang="less">
+  .user_info_panal {
+    margin: 30rpx;
+    background: #fff;
+    height: 300rpx;
+    box-shadow: 0 0 10rpx #888888;
+  }
+  .user_head {
+    height: 100rpx;
+    width: 100%;
+    line-height: 100rpx;
+    padding: 20rpx;
+    font-size: 36rpx;
+    color: #1f1f1f;
+
+  }
+  .user_head .van-button--default {
+    border: 1px solid #979797;
+  }
+  .img1 {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 20rpx;
+  }
+  .img2 {
+    width: 40rpx;
+    height: 40rpx;
+    display: inline-block;
+    margin-top: 40rpx;
+  }
+  .nav_list {
+    background-color: #B8A48A;
+  }
+  .nav_item {
+    display: inline-block;
+    border-right: 1px solid #fff;
+    text-align: center;
+    height: 90rpx;
+    width: 30%;
+    text {
+      display: block;
+      font-size: 28rpx;
+      color: #fff;
+      height: 40rpx;
+    }
+  }
+   .cellGroup {
+     margin-bottom: 50rpx;
+     background-color: #DEDEDE;
+   }
+</style>
 <template>
-  <view>
-
-456
-
+  <view style="background-color: #f1f3f4">
+    <view class="user_info_panal">
+      <view class="user_head">
+        <van-row>
+          <van-col span="4"><image src="../assets/11.png" class="img1" /></van-col>
+          <van-col span="12">磨人的小妖精</van-col>
+          <van-col span="2"><van-icon name="comment-o" info="1"></van-icon></van-col>
+          <van-col span="6"><van-button size="mini" round type="default" @tap="editUserInfo" >编辑资料</van-button></van-col>
+        </van-row>
+      </view>
+      <view class="user_head nav_list">
+        <repeat for="{{navList}}" key="index" index="index" item="item">
+          <view class="nav_item">
+            <text>{{item.num}}</text>
+            <text>{{item.name}}</text>
+          </view>
+        </repeat>
+      </view>
+    </view>
+    <view>
+      <van-cell-group border="{{border}}" custom-class="cellGroup">
+        <van-cell title="我的订单" is-link icon="orders-o" border="{{border}}"></van-cell>
+        <van-cell title="商家入驻" is-link icon="shop-o" border="{{border}}"></van-cell>
+        <van-cell title="玩转平台" is-link icon="smile-o" border="{{border}}"></van-cell>
+        <van-cell title="常驻地址" is-link icon="location-o" border="{{border}}"></van-cell>
+      </van-cell-group>
+      <van-cell-group border="{{border}}" custom-class="cellGroup" >
+        <van-cell title="联系我们" is-link icon="friends-o" border="{{border}}"></van-cell>
+        <van-cell title="反馈与帮助" is-link icon="browsing-history-o" border="{{border}}"></van-cell>
+      </van-cell-group>
+      <van-button size="large">切换用户</van-button>
+    </view>
   </view>
+
 </template>
 <script>
   import wepy from 'wepy'
 
-
   export default class User extends wepy.page {
     config = {
-      navigationBarTitleText: '我的'
+      navigationBarTitleText: '我的',
+      usingComponents: {
+        'van-icon': '../components/vant/icon/index',
+        'van-row': '../components/vant/row/index',
+        'van-col': '../components/vant/col/index',
+        'van-button': '../components/vant/button/index',
+        'van-cell': '../components/vant/cell/index',
+        'van-cell-group': '../components/vant/cell-group/index'
+      }
+    }
+    data = {
+      navList: [
+        { num: 53, name: '收藏' },
+        { num: 46, name: '关注' },
+        { num: 24, name: '笔记' }
+      ],
+      border: false
+    }
+    methods = {
+      editUserInfo () {
+        wepy.navigateTo({
+          url: '/pages/editUserInfo'
+        })
+      }
+
     }
   }
 </script>
+

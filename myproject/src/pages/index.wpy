@@ -41,7 +41,16 @@
       }
     }
   }
-
+.Release {
+  position: fixed;
+  right: 50rpx;
+  bottom: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
+  box-shadow: 0rpx 0rpx 10rpx #62484C, inset 0rpx 0rpx 20rpx #62484C;;
+  border-radius: 60em;
+  color: #fff;
+}
 </style>
 <template>
   <view class="search-area">
@@ -70,6 +79,7 @@
       </repeat>
      </view>
   </view>
+  <van-icon name="add" class="Release" color="#62484C" size="60rpx" @tap="setRelease"  />
 </template>
 <script>
   import wepy from 'wepy'
@@ -160,6 +170,11 @@
       goDetail(index) {
         wepy.navigateTo({
           url: '/pages/shoppingDetail'
+        })
+      },
+      setRelease() {
+        wepy.navigateTo({
+          url: '/pages/release'
         })
       }
     }

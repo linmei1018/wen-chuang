@@ -1,0 +1,71 @@
+<style lang="less">
+  .info_content {
+    /*margin-top: 20px;*/
+  }
+.img1 {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+}
+  .van-cell-text {
+    position: absolute;
+    top: 26px;
+    display: inline-block;
+    left: 80px;
+    color: #8a8a8a;
+  }
+  .HeadPortrait .van-cell__right-icon-wrap {
+    margin-top: 15px;
+  }
+</style>
+<template>
+  <view class="info_content">
+    <van-cell-group border="{{false}}">
+      <van-cell is-link class="HeadPortrait" title="头像" bind:click='changeAvatar'>
+        <image slot src="{{avatar}}" class="img1" />
+      </van-cell>
+      <van-cell title="昵称" is-link value="{{ nameValue }}" />
+      <van-cell title="性别" is-link value="{{ sexValue }}" />
+      <van-cell title="生日" is-link value="{{ BirthdayValue }}" />
+      <van-cell title="个性签名" is-link value="{{ autographValue }}" />
+    </van-cell-group>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class EditUserInfo extends wepy.page {
+    config = {
+      navigationBarTitleText: '编辑资料',
+      usingComponents: {
+        'van-field': '../components/vant/field/index',
+        'van-icon': '../components/vant/icon/index',
+        'van-cell': '../components/vant/cell/index',
+        'van-cell-group': '../components/vant/cell-group/index',
+      }
+    }
+    data = {
+      avatar: '../assets/11.png',
+      nameValue: '磨人的小妖精',
+      sexValue: '女性',
+      BirthdayValue: '',
+      autographValue: ''
+    }
+    methods = {
+      changeAvatar () {
+        let that = this
+        wepy.chooseImage({
+          count: 1, // 最多可以选择的图片张数，默认9
+          sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+          sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+          success: function (res) {
+            that.avatar = res.tempFilePaths;
+            that.$apply();
+          }
+        })
+      }
+    }
+  }
+</script>
