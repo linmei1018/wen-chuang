@@ -6,7 +6,9 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  background-color: #CCFF00;
 }
+.content {background-color: #CCFF00}
 </style>
 
 <script>
@@ -27,7 +29,8 @@ export default class extends wepy.app {
       'pages/user',
       'pages/shoppingDetail',
       'pages/release',
-      'pages/editUserInfo'
+      'pages/editUserInfo',
+      'pages/editInfoCom'
     ],
     window: {
       backgroundTextStyle: 'light',

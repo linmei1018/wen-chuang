@@ -1,0 +1,91 @@
+<style lang="less">
+  page {
+    width: 100%;
+    height: 100%;
+    background: #DEDEDE;
+  }
+.title {
+  font-size: 12px;
+  color: #616161;
+  margin-left: 16px;
+}
+  .infoContent .van-cell {
+    background: #f1f3f4;
+  }
+  .infoText .van-cell {
+    height: 120px;
+  }
+  .text {
+    /*width: 100%;*/
+    height: 100px;
+    background: #f1f3f4;
+    font-size: 14px;
+    line-height: 24px;
+    color: #333;
+    padding: 10px 15px;
+  }
+  .text textarea {
+    width: 100%;
+    height: 80px;
+  }
+</style>
+<template>
+  <view wx:if="{{infoId === '1'}}" class="infoContent">
+    <text class="title">{{infoTitle}}</text>
+    <van-field
+      value="{{ infoName }}"
+      border="{{ false }}"
+      maxlength="{{24}}"
+      focus="{{ true }}"
+      show-confirm-bar
+      bind:confirm="onChange"
+
+    />
+  </view>
+  <view wx:else class="infoContent infoText">
+    <text class="title">{{infoTitle2}}</text>
+    <view class="text">
+      <textarea value="{{ infoName }}" bindinput="bindTextAreaBlur" bindconfirm="commit" focus auto-focus maxlength="{{100}}" show-confirm-bar />
+      <view style="text-align: right;">{{textNub}}</view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class EditInfoCom extends wepy.page {
+    config = {
+      navigationBarTitleText: '',
+      usingComponents: {
+        'van-field': '../components/vant/field/index',
+      }
+    }
+    data = {
+      infoTitle: '请设置2-24字符，不包括@<>/等无效字符哦~',
+      infoTitle2: '有趣的个人介绍吸引更多粉丝哦~',
+      infoName: '',
+      infoId: '',
+      textNub: 100,
+    }
+    methods = {
+      onChange (event) {
+        // event.detail 为当前输入的值
+        console.log(event.detail);
+      },
+      bindTextAreaBlur(event) {
+        this.textNub = 100 - event.detail.cursor
+      },
+      commit (event) {
+        console.log(event.detail.value);
+      }
+    }
+    onLoad (options) {console.log(options.name)
+      this.infoName = options.name
+      this.infoId = options.id
+      wepy.setNavigationBarTitle({
+        title: options.title
+      })
+      this.$apply()
+    }
+  }
+</script>

@@ -1,6 +1,8 @@
 <style lang="less">
-  .info_content {
-    /*margin-top: 20px;*/
+  page {
+    width: 100%;
+    height: 100%;
+    background: #DEDEDE;
   }
 .img1 {
   width: 50px;
@@ -10,28 +12,76 @@
   overflow: hidden;
 }
   .van-cell-text {
+    display: inline-block;
+    color: #616161;
+    margin-right: 51px;
+  }
+  .edit_head {
     position: absolute;
     top: 26px;
-    display: inline-block;
     left: 80px;
-    color: #8a8a8a;
+    color: #8A8A8A;
   }
   .HeadPortrait .van-cell__right-icon-wrap {
     margin-top: 15px;
+  }
+  .grey {
+    color: #8A8A8A;
+  }
+  .black {
+    color: #1F1F1F;
   }
 </style>
 <template>
   <view class="info_content">
     <van-cell-group border="{{false}}">
-      <van-cell is-link class="HeadPortrait" title="头像" bind:click='changeAvatar'>
-        <image slot src="{{avatar}}" class="img1" />
+      <van-cell is-link class="HeadPortrait" bind:click='changeAvatar'>
+        <view slot="title">
+          <image slot src="{{avatar}}" class="img1" />
+          <view class="van-cell-text edit_head">修改头像</view>
+        </view>
       </van-cell>
-      <van-cell title="昵称" is-link value="{{ nameValue }}" />
-      <van-cell title="性别" is-link value="{{ sexValue }}" />
-      <van-cell title="生日" is-link value="{{ BirthdayValue }}" />
-      <van-cell title="个性签名" is-link value="{{ autographValue }}" />
+      <van-cell is-link bind:click='changeName'>
+        <view slot="title">
+          <view class="van-cell-text">昵称</view>
+          <text>{{ nameValue }}</text>
+        </view>
+      </van-cell>
+      <van-cell is-link bind:click="changeSex">
+        <view slot="title">
+          <view class="van-cell-text">性别</view>
+          <text>{{ sexValue }}</text>
+        </view>
+      </van-cell>
+      <van-cell is-link bind:click='changeBirthday'>
+        <view slot="title">
+          <view class="van-cell-text">生日</view>
+          <text class="{{ BirthdayValue === '' ?  'grey' : 'black' }}">{{ BirthdayValue || '未选择' }}</text>
+        </view>
+      </van-cell>
+      <van-cell is-link bind:click='changeAutograph'>
+        <view slot="title">
+          <view class="van-cell-text">个性签名</view>
+          <text class="{{ autographValue === '' ?  'grey' : 'black' }}">{{ autographValue || '未填写' }}</text>
+        </view>
+      </van-cell>
     </van-cell-group>
   </view>
+  <!-- 性别选择 -->
+  <van-popup show="{{ sexModal }}" position="bottom">
+    <van-picker show-toolbar columns="{{ sexColumns }}" bind:cancel="onCancelSex" bind:confirm="onConfirmSex" />
+  </van-popup>
+  <!-- 生日选择 -->
+  <van-popup show="{{ timeModal }}" position="bottom">
+    <van-datetime-picker
+      value="{{currentDate}}"
+      type="date"
+      formatter="{{formatter}}"
+      min-date="{{ minDate }}"
+      bind:cancel="onCancelTime"
+      bind:confirm="onConfirmTime"
+    />
+  </van-popup>
 </template>
 <script>
   import wepy from 'wepy'
@@ -44,16 +94,39 @@
         'van-icon': '../components/vant/icon/index',
         'van-cell': '../components/vant/cell/index',
         'van-cell-group': '../components/vant/cell-group/index',
+        'van-popup': '../components/vant/popup/index',
+        'van-picker': '../components/vant/picker/index',
+        'van-datetime-picker': '../components/vant/datetime-picker/index'
       }
     }
+
     data = {
       avatar: '../assets/11.png',
       nameValue: '磨人的小妖精',
       sexValue: '女性',
       BirthdayValue: '',
-      autographValue: ''
+      autographValue: '',
+      sexModal: false,
+      sexColumns: ['男性', '女性'],
+      timeModal: false,
+      currentDate: new Date().getTime(),
+      minDate: new Date(1970,1,1),
+      formatter(type, value) {
+        if (type === 'year') {
+          return `${value}年`;
+        } else if (type === 'month') {
+          return `${value}月`;
+        } else if (type === 'day') {
+          return `${value}日`
+        }
+        return value;
+      }
+    }
+    onLoad () {
+
     }
     methods = {
+      // 修改头像
       changeAvatar () {
         let that = this
         wepy.chooseImage({
@@ -61,11 +134,48 @@
           sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
           sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
           success: function (res) {
-            that.avatar = res.tempFilePaths;
-            that.$apply();
+            that.avatar = res.tempFilePaths
+            that.$apply()
           }
         })
+      },
+    //  修改昵称
+      changeName() {
+        wepy.navigateTo({
+          url: `/pages/editInfoCom?id=1&title=修改昵称&name=${this.nameValue}`
+        })
+      },
+      //  修改个性签名
+      changeAutograph () {
+        wepy.navigateTo({
+          url: `/pages/editInfoCom?id=2&title=个性签名&name=${this.autographValue}`
+        })
+      },
+    // 性别选择
+      changeSex () {
+        this.sexModal = true
+      },
+      onConfirmSex(e) {
+        this.sexValue = e.detail.value
+        this.sexModal = false
+        this.$apply()
+      },
+      onCancelSex() {
+        this.sexModal = false
+      },
+    //  生日选择
+      changeBirthday() {
+        this.timeModal = true
+      },
+      onConfirmTime(v) {
+        console.log(v.detail) //还要转成日期格式
+        this.BirthdayValue = v.detail
+        this.timeModal = false
+      },
+      onCancelTime() {
+        this.timeModal = false
       }
     }
+
   }
 </script>
