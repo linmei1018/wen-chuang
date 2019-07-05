@@ -77,10 +77,10 @@
     </view>
     <view>
       <van-cell-group border="{{border}}" custom-class="cellGroup">
-        <van-cell title="我的订单" is-link icon="orders-o" border="{{border}}"></van-cell>
+        <van-cell title="我的订单" is-link icon="orders-o" border="{{border}}" @click="byOrders"></van-cell>
         <van-cell title="商家入驻" is-link icon="shop-o" border="{{border}}"></van-cell>
         <van-cell title="玩转平台" is-link icon="smile-o" border="{{border}}"></van-cell>
-        <van-cell title="常驻地址" is-link icon="location-o" border="{{border}}"></van-cell>
+        <van-cell title="常驻地址" is-link icon="location-o" border="{{border}}" @click="byAddress"></van-cell>
       </van-cell-group>
       <van-cell-group border="{{border}}" custom-class="cellGroup" >
         <van-cell title="联系我们" is-link icon="friends-o" border="{{border}}"></van-cell>
@@ -119,8 +119,19 @@
         wepy.navigateTo({
           url: '/pages/editUserInfo'
         })
+      },
+      // 订单
+      byOrders() {
+        wepy.navigateTo({
+          url: '/pages/MyOrders'
+        })
+      },
+      //地址
+      byAddress() {
+        wepy.navigateTo({
+          url: '/pages/MyAddress'
+        })
       }
-
     }
   }
 </script>

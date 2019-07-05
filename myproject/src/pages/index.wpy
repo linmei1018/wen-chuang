@@ -53,17 +53,19 @@
 }
 </style>
 <template>
-  <view class="search-area">
-    <van-search background="#f1f3f4" shape="round" @search="onSearch" placeholder="搜索文创的商品" ></van-search>
-  </view>
-  <view class="home-container">
+  <view style="position: fixed;width: 100%;z-index: 10;">
+    <view class="search-area">
+      <van-search background="#f1f3f4" shape="round" @search="onSearch" placeholder="搜索文创的商品" ></van-search>
+    </view>
     <ivew class="tabNavHome">
-      <van-tabs active="{{ active }}" bind:change="onChange">
+      <van-tabs active="{{ active }}" bind:change="onChange" sticky>
         <van-tab title="推荐"></van-tab>
         <van-tab title="附近"></van-tab>
         <van-tab title="关注"></van-tab>
       </van-tabs>
     </ivew>
+  </view>
+  <view class="home-container">
     <view class="shopping_list">
       <repeat for="{{shoppingList}}" key="index" index="index" item="item">
         <view class="list-item" @tap="goDetail(index)">
